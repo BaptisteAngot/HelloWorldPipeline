@@ -5,6 +5,8 @@ services:
     build: ./backend
     container_name: express-api
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV}
+    env_file:
+      - ./backend/.env

@@ -10,6 +10,8 @@ COPY package.json ./
 # Installation des dépendances
 RUN npm install --only=production
 
+COPY .env .env
+
 # Copie du reste des fichiers
 COPY . .
 
