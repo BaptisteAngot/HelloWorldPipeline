@@ -7,6 +7,10 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Serveur Express démarré sur le port ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Serveur Express démarré sur le port ${PORT}`);
+    });
+}
+
+module.exports = app; // Exportation pour Jest
