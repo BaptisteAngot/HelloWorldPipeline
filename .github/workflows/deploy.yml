@@ -1,0 +1,25 @@
+name: CI/CD Express Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: conect to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Construire l’image Docker
+      run: docker build -t monutilisateur/express-api ./backend
+
+    - name: Pousser l’image sur Docker Hub
+      run: |
+        docker tag monutilisateur/express-api monutilisateur/express-api:latest
+        docker push monutilisateur/express-api:latest
